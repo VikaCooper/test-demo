@@ -24,30 +24,40 @@ import imgUrl from "@/assets/img";
 
 export default {
   name: 'ResultPager',
+  props: {
+    name: {
+      type: String,
+      default: ''
+    },
+    location: {
+      type: String,
+      default: ''
+    },
+  },
   data() {
     return {
       imgUrl,
-      visible: true,
       date: '',
       time: '',
-      location: '',
-      name: '',
+      // location: '',
+      // name: '',
       fakeName: '',
       fakeShow: true,
     }
   },
   mounted() {
-    const {name = '', location = ''} = this.$route.query
-    if (name && location) {
-      this.name = name
-      this.location = location
-      this.getTime()
-      this.updateTime()
-      this.visible = false
-      this.switchNameStatus()
-    } else {
-      this.$router.go(-1)
-    }
+    this.getTime()
+    this.updateTime()
+    this.switchNameStatus()
+    // const {name = '', location = ''} = this.$route.query
+    // if (this.name && this.location) {
+    //   this.getTime()
+    //   this.updateTime()
+    //   this.visible = false
+    //   this.switchNameStatus()
+    // } else {
+    //   this.$router.go(-1)
+    // }
   },
   methods: {
     getDate() {

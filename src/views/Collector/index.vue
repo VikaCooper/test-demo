@@ -102,12 +102,16 @@ export default {
       window.localStorage.setItem('test-demo-location-list', JSON.stringify(this.locationList))
 
 
-      this.$router.push({
-        path: '/result',
-        query: {
-          name: this.name,
-          location: this.location
-        }
+      // this.$router.push({
+      //   path: '/result',
+      //   query: {
+      //     name: this.name,
+      //     location: this.location
+      //   }
+      // })
+      this.$emit('submit', {
+        name: this.name,
+        location: this.location
       })
     },
     confirmLoc(value) {
