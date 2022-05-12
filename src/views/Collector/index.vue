@@ -109,7 +109,7 @@ export default {
       //     location: this.location
       //   }
       // })
-      this.$emit('submit', {
+      this.$emit('confirm', {
         name: this.name,
         location: this.location
       })

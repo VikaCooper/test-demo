@@ -1,7 +1,7 @@
 <template>
   <div class="index-page">
-    <ResultPager v-if="done" />
-    <Collector v-else @submit="handleSubmit" :name="name" :location="location" />
+    <ResultPager v-if="done" :name="name" :location="location" />
+    <Collector v-else @confirm="handleSubmit" />
   </div>
 </template>
 
