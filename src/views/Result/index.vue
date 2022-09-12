@@ -15,12 +15,12 @@
     <div class="location">
       <span>{{ location }}</span>
     </div>
-    <img :src="imgUrl.DEFAULT_SIZE" alt="test-img"/>
+    <img :src="imgUrl" alt="test-img"/>
   </div>
 </template>
 
 <script>
-import imgUrl from "@/assets/img";
+import imgList from "@/assets/img";
 
 export default {
   name: 'ResultPager',
@@ -33,31 +33,30 @@ export default {
       type: String,
       default: ''
     },
+    type: {
+      type: [String, Number],
+      default: 24
+    }
   },
   data() {
     return {
-      imgUrl,
+      imgList,
       date: '',
       time: '',
-      // location: '',
-      // name: '',
       fakeName: '',
       fakeShow: true,
+    }
+  },
+  computed: {
+    imgUrl() {
+      const findImg = this.imgList.find(item => Number(this.type) === item.id)
+      return findImg && findImg.base64
     }
   },
   mounted() {
     this.getTime()
     this.updateTime()
     this.switchNameStatus()
-    // const {name = '', location = ''} = this.$route.query
-    // if (this.name && this.location) {
-    //   this.getTime()
-    //   this.updateTime()
-    //   this.visible = false
-    //   this.switchNameStatus()
-    // } else {
-    //   this.$router.go(-1)
-    // }
   },
   methods: {
     getDate() {
@@ -88,7 +87,10 @@ export default {
       }, 1000)
     },
     switchNameStatus() {
-      if (this.name.length && this.name) {
+      if (!this.name.length || !this.name) return
+      if (this.name.length <= 2) {
+        this.fakeName = this.name[0] + '*'
+      } else {
         this.fakeName = this.name[0] + '*' + this.name[this.name.length - 1]
       }
     },

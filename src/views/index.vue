@@ -1,6 +1,6 @@
 <template>
   <div class="index-page">
-    <ResultPager v-if="done" :name="name" :location="location" />
+    <ResultPager v-if="done" :name="name" :location="location" :type="type"/>
     <Collector v-else @confirm="handleSubmit" />
   </div>
 </template>
@@ -20,13 +20,15 @@ export default {
       done: false,
       name: '',
       location: '',
+      type: '',
     }
   },
   methods: {
-    handleSubmit({name, location}) {
+    handleSubmit({name, location, type}) {
       this.done = true
       this.name = name
       this.location = location
+      this.type = type
     }
   }
 }
